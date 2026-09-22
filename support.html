@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>Auridora — support</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <a class="brand" href="terms.html">Auridora</a>
+    <nav aria-label="Legal documents">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Reliability</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </header>
+  <main>
+    <label for="language">Language</label>
+    <select id="language"><option value="it">Italiano</option><option value="en">English</option><option value="es">Español</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="zh-Hans">简体中文</option><option value="hi">हिन्दी</option></select>
+    <article class="legal-copy" data-language="it" lang="it" dir="auto" hidden>
+  <h1>Supporto</h1>
+  <p>S01. Scrivi a auridora.app@outlook.com indicando solo modello dispositivo, versione iOS&#47;Android, versione Auridora, orario atteso&#47;osservato e Alarm Health. Non inviare contenuti personali non necessari. Le richieste chiuse sono riesaminate ed eliminate entro 12 mesi, salvo necessità legale o di tutela documentata e limitata.</p>
+</article>
+<article class="legal-copy" data-language="en" lang="en" dir="auto" hidden>
+  <h1>Support</h1>
+  <p>S01. Email auridora.app@outlook.com with only device model, iOS&#47;Android version, Auridora version, expected&#47;observed time and Alarm Health. Do not send unnecessary personal content. Closed requests are reviewed and deleted within 12 months unless a documented, limited legal or claims need applies.</p>
+</article>
+<article class="legal-copy" data-language="es" lang="es" dir="auto" hidden>
+  <h1>Soporte</h1>
+  <p>S01. Escribe a auridora.app@outlook.com indicando solo dispositivo, iOS&#47;Android, versión Auridora, hora esperada&#47;observada y Alarm Health. No envíes contenido personal innecesario. Las solicitudes cerradas se revisan y eliminan en 12 meses salvo necesidad legal o de defensa documentada y limitada.</p>
+</article>
+<article class="legal-copy" data-language="fr" lang="fr" dir="auto" hidden>
+  <h1>Assistance</h1>
+  <p>S01. Écrivez à auridora.app@outlook.com avec seulement appareil, iOS&#47;Android, version Auridora, heure attendue&#47;observée et Alarm Health. N’envoyez pas de contenu personnel inutile. Les demandes closes sont revues et supprimées sous 12 mois sauf besoin juridique ou de défense documenté et limité.</p>
+</article>
+<article class="legal-copy" data-language="de" lang="de" dir="auto" hidden>
+  <h1>Support</h1>
+  <p>S01. Schreibe an auridora.app@outlook.com nur mit Gerät, iOS&#47;Android, Auridora-Version, erwarteter&#47;beobachteter Zeit und Alarm Health. Keine unnötigen persönlichen Inhalte. Geschlossene Anfragen werden binnen 12 Monaten geprüft und gelöscht, außer bei dokumentiertem, begrenztem Rechts-&#47;Abwehrbedarf.</p>
+</article>
+<article class="legal-copy" data-language="zh-Hans" lang="zh-Hans" dir="auto" hidden>
+  <h1>支持</h1>
+  <p>S01. 请发送邮件至 auridora.app@outlook.com，仅提供设备型号、iOS&#47;Android 版本、Auridora 版本、预期&#47;实际时间和 Alarm Health 状态。请勿发送不必要的个人内容。已结案请求将在 12 个月内复核并删除，除非存在有记录且范围受限的法律或权利保护需要。</p>
+</article>
+<article class="legal-copy" data-language="hi" lang="hi" dir="ltr" hidden>
+  <h1>सहायता</h1>
+  <p>S01. auridora.app@outlook.com पर केवल डिवाइस, iOS&#47;Android, Auridora संस्करण, अपेक्षित&#47;देखा समय और Alarm Health भेजें। अनावश्यक निजी सामग्री न भेजें। बंद अनुरोध 12 माह में जाँचे और मिटाए जाते हैं, सिवाय दर्ज और सीमित कानूनी&#47;दावा आवश्यकता के।</p>
+</article>
+  </main>
+  <footer>LEGAL-2026-09-22-RC2 · auridora.app@outlook.com</footer>
+  <script>
+    const supported = ["it","en","es","fr","de","zh-Hans","hi"];
+    const query = new URLSearchParams(location.search).get('lang');
+    const browser = navigator.language || 'en';
+    const initial = supported.includes(query) ? query :
+      (supported.includes(browser) ? browser :
+      (browser.startsWith('zh') ? 'zh-Hans' :
+      (supported.includes(browser.split('-')[0]) ? browser.split('-')[0] : 'en')));
+    const select = document.getElementById('language');
+    function show(language) {
+      document.documentElement.lang = language;
+      select.value = language;
+      document.querySelectorAll('[data-language]').forEach((article) => {
+        article.hidden = article.dataset.language !== language;
+      });
+      const next = new URL(location.href);
+      next.searchParams.set('lang', language);
+      history.replaceState(null, '', next);
+    }
+    select.addEventListener('change', () => show(select.value));
+    show(initial);
+  </script>
+</body>
+</html>
